@@ -1,0 +1,4 @@
+include crawl_knife/browser/base.py
+include crawl_knife/browser/chrome.py
+include crawl_knife/browser/js/*
+include crawl_knife/browser/add_ons/*
