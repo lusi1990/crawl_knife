@@ -2,8 +2,6 @@
 
 from distutils.core import setup
 
-from setuptools import find_packages
-
 setup(
     name='crawl_knife',
     version='0.0.5',
