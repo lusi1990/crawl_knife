@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
     name='crawl_knife',
-    version='0.0.5',
+    version='0.0.6',
     description='Python crawl tool',
     author='Master',
     author_email='lusi2114@gmail.com',

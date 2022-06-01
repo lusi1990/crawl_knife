@@ -19,8 +19,8 @@ def chrome_proxy(user: str, password: str, endpoint: str) -> dict:
 def init_driver(user_agent=None,
                 language: str = "en-US",
                 proxy_uri: str = None,
-                headless: bool = True,
-                image_show: bool = False,
+                headless: bool = False,
+                image_show: bool = True,
                 resolution=None
                 ):
     """
