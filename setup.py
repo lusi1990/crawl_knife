@@ -8,7 +8,7 @@ setup(
     description='Python crawl tool',
     author='Master',
     author_email='lusi2114@gmail.com',
-    url='',
+    url='https://github.com/lusi1990/crawl_knife',
     install_requires=[
         "selenium>=3.141.0,<4.0",
         "selenium-wire>=4.6.4",
@@ -24,4 +24,5 @@ setup(
         ],
     },
     python_requires='>=3.6,<4',
+    long_description_content_type="text/x-rst",
 )
