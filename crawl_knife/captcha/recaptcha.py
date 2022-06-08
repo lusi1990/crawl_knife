@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def solve_by_2captcha(driver: WebDriver, api_key, url, invisible=0):
     """
-
+    使用 2captcha 解决 recaptcha
     :param driver: selenium webdriver
     :param api_key: 2captcha api key
     :param url: url to solve

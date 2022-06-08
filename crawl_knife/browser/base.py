@@ -20,3 +20,10 @@ def ads_interceptor(request):
     :param request:
     :return:
     """
+
+
+def locate():
+    """
+
+    :return:
+    """

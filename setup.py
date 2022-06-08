@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
     name='crawl_knife',
-    version='0.0.8',
+    version='0.0.9',
     description='Python crawl tool',
     author='Master',
     author_email='lusi2114@gmail.com',
@@ -14,6 +14,7 @@ setup(
         "selenium-wire>=4.6.4",
         "requests>=2.27.1",
         "webdriver-manager>=3.7.0",
+        "2captcha-python",
     ],
     packages=['crawl_knife'],
     include_package_data=True,
@@ -21,6 +22,7 @@ setup(
         'crawl_knife': [
             './browser/add_ons/*',
             './browser/js/*',
+            './captcha/*',
         ],
     },
     python_requires='>=3.6,<4',
