@@ -94,11 +94,11 @@ def init_driver(user_agent=None,
 
 
 if __name__ == '__main__':
-
     _driver = init_driver(headless=False, image_show=True, resolution='1920,1080')
     try:
         # _driver.get('https://bot.sannysoft.com/')
-        _driver.get('https://www.google.com/recaptcha/api2/demo')
+        _driver.get('https://cis.scc.virginia.gov/EntitySearch/Index')
+        # _driver.get('https://www.google.com/recaptcha/api2/demo')
         # _driver.get('https://nowsecure.nl')
         import time
 
