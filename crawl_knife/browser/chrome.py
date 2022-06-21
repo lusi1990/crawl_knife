@@ -44,7 +44,6 @@ def init_driver(user_agent=None,
     wire_options['request_storage_max_size']: 100  # Store no more than 100 requests in memory
 
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.headless = headless
     # TODO random resolution and user_agent
     if resolution:
         chrome_options.add_argument(f"--window-size={resolution}")
@@ -72,6 +71,7 @@ def init_driver(user_agent=None,
     chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
     chrome_options.add_experimental_option("useAutomationExtension", False)
     _root = os.path.abspath(os.path.dirname(__file__))
+    chrome_options.headless = headless
     if not headless:
         chrome_options.add_extension(os.path.join(_root,
                                                   'add_ons', 'buster_captcha_solver_for_humans-1.3.1-chrome.zip'))
@@ -97,9 +97,10 @@ if __name__ == '__main__':
     _driver = init_driver(headless=False, image_show=True, resolution='1920,1080')
     try:
         # _driver.get('https://bot.sannysoft.com/')
-        _driver.get('https://cis.scc.virginia.gov/EntitySearch/Index')
+        # _driver.get('https://cis.scc.virginia.gov/EntitySearch/Index')
         # _driver.get('https://www.google.com/recaptcha/api2/demo')
         # _driver.get('https://nowsecure.nl')
+        _driver.get('https://ecorp.azcc.gov/EntitySearch/Index')
         import time
 
         time.sleep(1000)
