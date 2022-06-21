@@ -1,4 +1,4 @@
-selenium==3.141.0
+selenium>=4.0
 selenium-wire==4.6.4
 requests==2.27.1
 webdriver-manager==3.7.0
