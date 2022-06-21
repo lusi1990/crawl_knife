@@ -13,7 +13,7 @@ def image_interceptor(request):
     :param request:
     :return:
     """
-    if request.path.endswith(('.png', '.jpg', '.gif', '.ico')):
+    if request.path.endswith(('.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico')):
         request.abort()
 
 
