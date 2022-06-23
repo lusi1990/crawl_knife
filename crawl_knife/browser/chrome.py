@@ -3,6 +3,7 @@ import sys
 
 from seleniumwire import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+import undetected_chromedriver.v2 as uc
 
 from crawl_knife.browser.base import image_interceptor
 
@@ -88,7 +89,7 @@ def init_driver_uc(user_agent=None,
                    language: str = "en-US",
                    proxy_uri: str = None,
                    headless: bool = False,
-                   image_show: bool = True,
+                   version_main=None,
                    resolution=None
                    ):
     """
@@ -97,7 +98,7 @@ def init_driver_uc(user_agent=None,
     :param language:
     :param proxy_uri: http://username:password@endpoint:port
     :param headless:
-    :param image_show:
+    :param version_main: chrome version
     :param resolution:
     :return:
     """
@@ -111,31 +112,24 @@ def init_driver_uc(user_agent=None,
     wire_options['request_storage'] = 'memory',  # Store requests and responses in memory only
     wire_options['request_storage_max_size']: 100  # Store no more than 100 requests in memory
 
-    import undetected_chromedriver.v2 as ucv2
-
     chrome_options = webdriver.ChromeOptions()
-    # TODO random resolution and user_agent
     # if resolution:
     #     chrome_options.add_argument(f"--window-size={resolution}")
     # 设置 语言为 英语
     chrome_options.add_argument(f"--lang={language}")
     chrome_options.headless = headless
 
-    # driver = ucv2.Chrome()
-    driver = ucv2.Chrome(
-        executable_path=ChromeDriverManager().install(),
+    driver = uc.Chrome(
         options=chrome_options,
-        seleniumwire_options=wire_options
+        seleniumwire_options=wire_options,
+        version_main=version_main,
     )
-
-    if not image_show:
-        driver.request_interceptor = image_interceptor
 
     return driver
 
 
 if __name__ == '__main__':
-    _driver = init_driver_uc(headless=False, image_show=True, resolution='1920,1080')
+    _driver = init_driver_uc(headless=False, resolution='1920,1080')
     try:
         # _driver.get('https://bot.sannysoft.com/')
         # _driver.get('https://cis.scc.virginia.gov/EntitySearch/Index')
