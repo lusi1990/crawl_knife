@@ -55,10 +55,10 @@ def init_driver(user_agent=None,
     chrome_options.add_argument("--disable-setuid-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--disable-plugins")
-
     if sys.platform.upper().startswith("WIN"):
         chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("disable-infobars")
+    chrome_options.add_argument('ignore-certificate-errors')
     chrome_options.add_argument("--disable-blink-features=AutomationControlled")
     chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
     chrome_options.add_experimental_option("useAutomationExtension", False)

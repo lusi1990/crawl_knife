@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
     name='crawl_knife',
-    version='0.0.16',
+    version='0.1.0',
     description='Python crawl tool',
     author='Master',
     author_email='lusi2114@gmail.com',
@@ -16,6 +16,8 @@ setup(
         "webdriver-manager>=3.7.0",
         "undetected-chromedriver==3.1.5.post4",
         "2captcha-python",
+        "pydub",
+        "SpeechRecognition",
     ],
     packages=['crawl_knife'],
     include_package_data=True,
