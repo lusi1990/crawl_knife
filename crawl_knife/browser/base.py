@@ -7,11 +7,11 @@ import os
 import tempfile
 
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 CACHE_HOME = os.path.join(tempfile.gettempdir(), 'selenium_cache')
-STATIC_END = ('.js', '.css', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico')
+STATIC_END = ('.js', '.css', '.woff', '.woff2', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico')
 
 
 def image_interceptor(request):
