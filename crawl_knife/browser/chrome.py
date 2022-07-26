@@ -5,8 +5,6 @@ from seleniumwire import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 import undetected_chromedriver.v2 as uc
 
-from crawl_knife.browser.base import image_interceptor
-
 
 def init_driver(user_agent=None,
                 language: str = "en-US",
@@ -32,9 +30,6 @@ def init_driver(user_agent=None,
             "https": proxy_uri,
             'no_proxy': 'localhost,127.0.0.1'
         }
-    wire_options['request_storage'] = 'memory',  # Store requests and responses in memory only
-    wire_options['request_storage_max_size']: 100  # Store no more than 100 requests in memory
-
     chrome_options = webdriver.ChromeOptions()
     # TODO random resolution and user_agent
     if resolution:

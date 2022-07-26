@@ -10,7 +10,6 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-CACHE_HOME = os.path.join(tempfile.gettempdir(), 'selenium_cache')
 STATIC_END = ('.js', '.css', '.woff', '.woff2', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico')
 
 
@@ -32,6 +31,15 @@ def ads_interceptor(request):
     """
 
 
+def get_cache_path(request):
+    """
+
+    :param request:
+    :return:
+    """
+    return os.path.join(tempfile.gettempdir(), 'selenium_cache', request.host)
+
+
 def static_request_interceptor(request):
     """
     如果已经缓存了静态资源，则直接读缓存
@@ -42,7 +50,8 @@ def static_request_interceptor(request):
         request.abort()
     if request.path.endswith(STATIC_END):
         request.headers['Accept-Encoding'] = 'gzip'
-        file_path = os.path.join(CACHE_HOME, request.path.strip('/')) + request.querystring
+        cache_home = get_cache_path(request)
+        file_path = os.path.join(cache_home, request.path.strip('/')) + request.querystring
         if os.path.isfile(file_path):
             headers = json.load(open(file_path + "_headers", 'r', encoding='utf-8'))
             headers['X-Server'] = 'FILE_SERVER'
@@ -64,7 +73,8 @@ def static_response_interceptor(request, response):
     """
     if request.path.endswith(STATIC_END) and response.status_code == 200:
         path, name = os.path.split(request.path)
-        cache_path = os.path.join(CACHE_HOME, path.strip('/'))
+        cache_home = get_cache_path(request)
+        cache_path = os.path.join(cache_home, path.strip('/'))
         file_path = os.path.join(cache_path, name) + request.querystring
         if not os.path.isfile(file_path):
             if not os.path.isdir(cache_path):
