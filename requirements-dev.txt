@@ -1,1 +1,6 @@
 setuptools==62.3.2
+pylint
+pytest
+isort
+black
+twine
