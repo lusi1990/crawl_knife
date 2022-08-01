@@ -1,6 +1,7 @@
 import os
 import sys
 
+from selenium.webdriver.chrome.service import Service
 from seleniumwire import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 import undetected_chromedriver.v2 as uc
@@ -69,8 +70,11 @@ def init_driver(user_agent=None,
     else:
         chrome_options.add_argument("--disable-extensions")
 
-    driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=chrome_options,
-                              seleniumwire_options=wire_options)
+    driver = webdriver.Chrome(
+        service=Service(ChromeDriverManager().install()),
+        options=chrome_options,
+        seleniumwire_options=wire_options
+    )
     with open(os.path.join(_root, 'js', 'stealth.min.js')) as f:
         js = f.read()
     driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
@@ -199,8 +203,8 @@ def init_remote_driver(
 
 
 if __name__ == '__main__':
-    # _driver = init_driver(headless=False, resolution='1920,1080')
-    _driver = init_driver_uc(headless=False, resolution='1920,1080')
+    _driver = init_driver(headless=False, resolution='1920,1080')
+    # _driver = init_driver_uc(headless=False, resolution='1920,1080')
     try:
         # _driver.get('https://bot.sannysoft.com/')
         # _driver.get('https://cis.scc.virginia.gov/EntitySearch/Index')
