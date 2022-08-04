@@ -40,14 +40,22 @@ def get_cache_path(request):
     return os.path.join(tempfile.gettempdir(), 'selenium_cache', request.host)
 
 
-def static_request_interceptor(request):
+def static_request_interceptor(request, block_google_api=True):
     """
     如果已经缓存了静态资源，则直接读缓存
     :param request:
+    :param block_google_api: 是否屏蔽一些 google 服务， 比如 更新。。。
     :return:
     """
     if request.path.endswith('.ico'):
         request.abort()
+    if block_google_api:
+        if 'update.googleapis.com/service/update2' in request.url:
+            request.abort()
+        if 'accounts.google.com/ListAccounts' in request.url:
+            request.abort()
+        if 'www.googleapis.com/chromewebstore/v1.1/items/verify' in request.url:
+            request.abort()
     if request.path.endswith(STATIC_END):
         request.headers['Accept-Encoding'] = 'gzip'
         cache_home = get_cache_path(request)
@@ -71,6 +79,8 @@ def static_response_interceptor(request, response):
     :param response:
     :return:
     """
+    if response.headers.get('x-server', '') == 'FILE_SERVER':
+        return
     if request.path.endswith(STATIC_END) and response.status_code == 200:
         path, name = os.path.split(request.path)
         cache_home = get_cache_path(request)
