@@ -52,7 +52,7 @@ def static_request_interceptor(request, block_google_api=True):
     if block_google_api:
         if 'update.googleapis.com/service/update2' in request.url:
             request.abort()
-        if 'accounts.google.com/ListAccounts' in request.url:
+        if 'accounts.google.com' in request.url:
             request.abort()
         if 'www.googleapis.com/chromewebstore/v1.1/items/verify' in request.url:
             request.abort()
@@ -85,6 +85,7 @@ def static_response_interceptor(request, response):
         path, name = os.path.split(request.path)
         cache_home = get_cache_path(request)
         cache_path = os.path.join(cache_home, path.strip('/'))
+        # fixme filename maybe to long (MACOS MAX NAME is 255)
         file_path = os.path.join(cache_path, name) + request.querystring
         if not os.path.isfile(file_path):
             if not os.path.isdir(cache_path):
