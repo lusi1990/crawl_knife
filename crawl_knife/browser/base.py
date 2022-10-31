@@ -86,6 +86,7 @@ def static_response_interceptor(request, response):
         cache_home = get_cache_path(request)
         cache_path = os.path.join(cache_home, path.strip('/'))
         # fixme filename maybe to long (MACOS MAX NAME is 255)
+        # todo use pickle save response
         file_path = os.path.join(cache_path, name) + request.querystring
         if not os.path.isfile(file_path):
             if not os.path.isdir(cache_path):

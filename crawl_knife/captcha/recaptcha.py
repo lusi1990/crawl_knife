@@ -18,9 +18,6 @@ from twocaptcha import TwoCaptcha
 logger = logging.getLogger(__name__)
 
 
-
-
-
 def solve_by_2captcha(driver: WebDriver, api_key, url, invisible=0):
     """
     使用 2captcha 解决 recaptcha
@@ -90,7 +87,8 @@ def solve_by_speed_recognition(driver: WebDriver) -> bool:
             (By.CSS_SELECTOR, "span#recaptcha-anchor"))).click()
         driver.switch_to.default_content()
         WebDriverWait(driver, 10).until(
-            EC.frame_to_be_available_and_switch_to_it((By.CSS_SELECTOR, "iframe[contains(title,'recaptcha challenge expires in two minutes')]")))
+            EC.frame_to_be_available_and_switch_to_it(
+                (By.CSS_SELECTOR, "iframe[contains(title,'recaptcha challenge expires in two minutes')]")))
         WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, "button#recaptcha-audio-button"))).click()
         WebDriverWait(driver, 10).until(
